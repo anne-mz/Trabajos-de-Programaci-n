@@ -1,0 +1,90 @@
+#include <stdio.h>
+
+int main()
+{
+   
+   int menu = 1;
+    
+    do{
+        
+        printf("Operación: \n");
+        printf("1.- Suma \n");
+        printf("2.- Resta \n");
+        printf("3.- Multiplicación \n");
+        printf("4.- División \n");
+        printf("5.- cerrar calculadora \n");
+        scanf("%d", &menu);
+        
+        switch(menu){
+            case 1:
+             int cantidadnumeros;
+             float total, valor;
+             
+             printf("Cúantos numeros quieres sumar? ");
+             scanf("%d", &cantidadnumeros);
+             
+             for(int i = 0; i < cantidadnumeros; i++){
+                 printf("Numero a sumar: %d:", i + 1);
+                 scanf("%f", &valor);
+                 total += valor;
+             }
+             
+             printf("El resultado es %.2f \n", total);
+             break;
+            case 2:
+             float minudendo, sustraendo, diferencia;
+             
+             printf("A que numero restarás:");
+             scanf("%f", &minudendo);
+             
+             printf("Numero a restar:");
+             scanf("%f", &sustraendo);
+             
+             diferencia = minudendo - sustraendo;
+             
+             
+             printf("El resultado es %.2f \n", diferencia);
+             
+             break;
+            case 3:
+            float multiplicando, multiplicador, producto;
+             
+             printf("numero a multiplicar:");
+             scanf("%f", &multiplicando);
+             
+             printf("por cuanto:");
+             scanf("%f", &multiplicador);
+             
+             producto = multiplicando * multiplicador;
+             
+             
+             printf("El resultado es %.2f \n", producto);
+             
+             break;
+            case 4:
+             float divisor, dividendo, cosiente;
+             
+             printf("numero a dividir:");
+             scanf("%f", &divisor);
+             
+             printf("entre cuanto:");
+             scanf("%f", &dividendo);
+             
+             cosiente = divisor / dividendo ;
+             
+             
+             printf("El resultado es %.2f \n", cosiente);
+             
+             break;
+            default:
+             printf("opción no valida \n");
+        }
+        
+        
+        
+        
+        
+    }while (menu != 5);
+    
+    return 0;
+}

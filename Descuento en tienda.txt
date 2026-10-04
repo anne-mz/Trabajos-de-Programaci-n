@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+
+    int main(){
+        
+    float precio, iva, descuento, preciofinal, subtotal;
+    int cantidaddejuegos;
+    
+    
+    printf("¿Cúal es el precio del juego? \n");
+    scanf("%f", &precio);
+    
+    printf("¿Cúantos juegos vas a comprar? \n");
+    scanf("%d", &cantidaddejuegos);
+    
+     subtotal = precio * cantidaddejuegos;
+     descuento = subtotal * .35; 
+     iva = subtotal * .16;
+     preciofinal = subtotal - descuento + iva;
+    
+    printf("Por tu juego es: %.2F con la cantidad que llevas %d \n", precio, cantidaddejuegos);
+    printf("Te queda un toal de: %.2f", preciofinal);
+    printf("pagaste de iva %.2f dandote un descuento de: %.2f", iva, descuento);
+
+    return 0;
+}

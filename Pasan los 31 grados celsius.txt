@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main(){
+    
+    
+    float gradosf, Celsius;
+    
+    printf("Cuantos grados Fahrenheit muestra el medidor?");
+    scanf("%f", &gradosf);
+    
+    
+    Celsius = (gradosf -32) * 5/9;
+    
+    printf("Esos son %.2f grados celsius \n", Celsius);
+    
+    
+    if(Celsius < 31 ){
+    printf("No, no pasa los 31 grados Celsius \n");
+    }else{
+    printf("Si, si los pasa, ten cuidado!");    
+    }
+    
+    
+    return 0;
+}

@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int main(){
+    
+    
+    float celsius, gradosk;
+    
+    printf("Cuantos grados Kelvin muestra el medidor? ");
+    scanf("%f", &gradosk);
+    
+    celsius = gradosk - 273.15;
+    
+    printf("Esos son %.2f grados celsius \n", celsius);
+    
+    
+    if(celsius >= 0 && celsius < 11){
+    printf("te vas a congelar we \n", celsius);
+    }else if(celsius >= 12 && celsius < 20){
+    printf("ta frio, abrigate \n", celsius);    
+    }else if(celsius >= 21 && celsius < 30){
+    printf("ta templado, todo bien manito \n", celsius);    
+    }else if(celsius >= 31 && celsius < 40){
+    printf("ta caliente bro \n", celsius);    
+    }else if(celsius >= 41 && celsius <= 50){
+    printf("ta caliente! vives en Juaritos o q we \n", celsius);    
+    }else if(celsius < 0){
+    printf("demasiado frio pa, morirás de hipotermia\n", celsius);    
+    }else if(celsius > 50){
+    printf("te derrites bro echate awa \n", celsius);    
+    }
+    
+    
+    return 0;
+}

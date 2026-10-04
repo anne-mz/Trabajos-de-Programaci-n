@@ -1,0 +1,77 @@
+#include <stdio.h>
+
+int main()
+{
+   
+   int menu = 1;
+    
+    do{
+        
+        printf("Qué quieres hacer en el menu \n");
+        printf("1.- Ejercicio promedio con inicial \n");
+        printf("2.- Ejercicio con if-else if \n");
+        printf("3.- Ejercicio para sacar hipotenusa \n");
+        scanf("%d", &menu);
+        
+        switch(menu){
+            case 1:
+             printf("
+             #include <stdio.h>
+             int main(){
+               
+             char inicial;
+             float numero = 7;
+             float calificacion1, calificacion2, calificacion3, calificacion4, calificacion5, calificacionfinal;
+             
+             printf("¿Cúal es la inicial de tu nombre? \n");
+             scanf("%c", &inicial);
+             
+             printf("Qué calificación sacaste en el primer parcial?  ");
+             scanf("%f", &calificacion1);
+             
+             printf("Qué calificación sacaste en el segundo parcial? ");
+             scanf("%f", &calificacion2);
+             
+             printf("Qué calificación sacaste en el tercer parcial? ");
+             scanf("%f", &calificacion3);
+              
+             printf("Qué calificación sacaste en el cuarto parcial? ");
+             scanf("%f", &calificacion4);
+             
+             printf("Qué calificación sacaste en el quinto parcial? ");
+             scanf("%f", &calificacion5);
+             
+             calificacionfinal = (calificacion1 + calificacion2 + calificacion3 + calificacion4 + calificacion5) / 5;
+             
+             printf("Tu inicial es %c calificación final es de %.2f \n" , inicial, calificacionfinal);
+             
+             if(calificacionfinal > numero){
+             printf("Felicidades, pasaste!! \n");
+             }else{
+             printf("no, no pasaste :( \n");    
+             }
+                
+             
+             return 0;
+             }");
+             break;
+            case 2:
+             printf(" no\n");
+             break;
+            case 3:
+             printf(" no\n");
+            case 4:
+             printf("saliste del menu \n");
+             break;
+            default:
+             printf("opción no valida \n");
+        }
+        
+        
+        
+        
+        
+    }while (menu != 4);
+    
+    return 0;
+}

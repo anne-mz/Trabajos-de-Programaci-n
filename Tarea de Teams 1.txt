@@ -1,0 +1,132 @@
+#include <stdio.h>
+
+int main() {
+    
+    int menu = 1;
+    const char* trabajo3 = R"=====(
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    float cata, catb, hipotenusa;
+
+    printf("Cúal el valor del primer cateto? ");
+    scanf("%f", &cata);
+
+    printf("Cúal el valor del segundo cateto? ");
+    scanf("%f", &catb);
+
+    hipotenusa = sqrt((cata * cata) + (catb * catb));
+
+    printf("La hipotenusa es: %.2f \n", hipotenusa);
+
+    return 0;
+})=====";
+    const char* trabajo2 = R"=====(
+        #include <stdio.h>
+
+int main(){
+    
+    
+    float celsius, gradosk;
+    
+    printf("Cuantos grados Kelvin muestra el medidor? ");
+    scanf("%f", &gradosk);
+    
+    celsius = gradosk - 273.15;
+    
+    printf("Esos son %.2f grados celsius \n", celsius);
+    
+    
+    if(celsius >= 0 && celsius < 11){
+    printf("te vas a congelar we \n", celsius);
+    }else if(celsius >= 12 && celsius < 20){
+    printf("ta frio, abrigate \n", celsius);    
+    }else if(celsius >= 21 && celsius < 30){
+    printf("ta templado, todo bien manito \n", celsius);    
+    }else if(celsius >= 31 && celsius < 40){
+    printf("ta caliente bro \n", celsius);    
+    }else if(celsius >= 41 && celsius <= 50){
+    printf("ta caliente! vives en Juaritos o q we \n", celsius);    
+    }else if(celsius < 0){
+    printf("demasiado frio pa, morirás de hipotermia\n", celsius);    
+    }else if(celsius > 50){
+    printf("te derrites bro echate awa \n", celsius);    
+    }
+    
+    
+    return 0;
+})=====";
+    const char* trabajo1 = R"=====(
+    #include <stdio.h>
+
+    int main(){
+    
+    char inicial;
+    float numero = 7;
+    float calificacion1, calificacion2, calificacion3, calificacion4, calificacion5, calificacionfinal;
+    
+    printf("¿Cúal es la inicial de tu nombre? \n");
+    scanf("%c", &inicial);
+    
+    printf("Qué calificación sacaste en el primer parcial?  ");
+    scanf("%f", &calificacion1);
+    
+    printf("Qué calificación sacaste en el segundo parcial? ");
+    scanf("%f", &calificacion2);
+    
+    printf("Qué calificación sacaste en el tercer parcial? ");
+    scanf("%f", &calificacion3);
+    
+    printf("Qué calificación sacaste en el cuarto parcial? ");
+    scanf("%f", &calificacion4);
+    
+    printf("Qué calificación sacaste en el quinto parcial? ");
+    scanf("%f", &calificacion5);
+    
+    calificacionfinal = (calificacion1 + calificacion2 + calificacion3 + calificacion4 + calificacion5) / 5;
+    
+    printf("Tu inicial es %c calificación final es de %.2f \n" , inicial, calificacionfinal);
+    
+    if(calificacionfinal > numero){
+    printf("Felicidades, pasaste!! \n");
+    }else{
+    printf("no, no pasaste :( \n");    
+    }
+    return 0;
+    )=====";
+
+    
+    do{
+        
+        printf("Qué quieres hacer en el menu \n");
+        printf("1.- ver ejercicio promedio con inicial \n");
+        printf("2.- ver ejercicio con if-else if \n");
+        printf("3.- ver ejercicio para sacar hipotenusa \n");
+        printf("4.- salir del menu \n");
+        scanf("%d", &menu);
+        
+        switch(menu){
+            case 1:
+             printf("El ejercio va asi: \n %s \nPuedes copiarlo y probarlo tu mismo! \n", trabajo1);
+             break;
+            case 2:
+             printf("El ejercio va asi: \n %s \nPuedes copiarlo y probarlo tu mismo! \n",trabajo2);
+             break;
+            case 3:
+             printf("El ejercio va asi: \n %s \nAqui apliqué algo que no estaba en clase pero no habia otra manera :/ \n",trabajo3);
+            case 4:
+             printf("saliste del menu \n");
+             break;
+            default:
+             printf("opción no valida \n");
+        }
+        
+        
+        
+        
+        
+    }while (menu != 4);
+    
+    return 0;
+}

@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main(){
+
+    float largo;
+    float volumen;
+    
+    
+    printf("Tienes que medir el largo del cubo ¿Cúanto mide? \n");
+    scanf("%f", &largo);
+
+    
+    volumen = largo * largo * largo;
+    
+    printf("El volumen del cube es. %.2F", volumen);
+
+    return 0;
+}
