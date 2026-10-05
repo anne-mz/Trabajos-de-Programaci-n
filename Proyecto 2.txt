@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int esPar(int numero){
+    if(numero % 2 == 0){
+     return 1;
+    }else{
+     return 0;
+    }
+}
+
+void versigno(int numero){
+    if(numero > 0){
+        printf("Tu número es positivo\n");
+    }else if(numero < 0){
+        printf("Tu número es negativo\n");
+    }else{
+        printf("Tu número es cero\n");
+    }
+}
+
+int valorabsoluto(int numero){
+    if(numero < 0){
+     return numero * -1;
+    }else{
+     return numero;
+    }
+}
+
+int main(){
+    int numero;
+    int opcion;
+
+    do{
+        printf("Ingresa un número cualquiera: ");
+        scanf("%d", &numero);
+
+        if(esPar(numero) == 1){
+            printf("Tu número es par\n");
+        }else{
+            printf("Tu número es impar\n");
+        }
+        
+        versigno(numero);
+        
+        printf("El valor absoluto de tu número es: %d\n", valorabsoluto(numero));
+        
+        printf("\n¿Quieres checar algún otro número? (1 = Si, 0 = No): ");
+        scanf("%d", &opcion);
+        
+    }while(opcion == 1);
+
+    return 0;
+}
