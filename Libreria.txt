@@ -1,0 +1,42 @@
+#ifndef OPERACIONES_H
+#define OPERACIONES_H
+
+////definicion de constantes
+#define PI 3.1416
+
+
+#include <studio.h>
+#include "operaciones.h"
+
+int sumar(int a, int b){
+    return a + b;
+}
+
+int calcularCuadrado(int lado){
+    return lado * lado;
+}
+void mostrarvector(int v[], int tam);
+    printf("[ ");
+    for(int i = 0; i < tam; i++){
+        printf("%d ", v[i]);
+    }
+    printf("]\n");
+}
+
+
+#endif
+
+int main(){
+    int resultadoSuma = suma(10, 5);
+    int area = calcularAreaCuadrado(4);
+    
+    int misDatos[3] = {10, 20, 30};
+    
+    printf("la suma es %d\n", resultadoSuma);
+    printf("El aea del cuadrado es %d\n", area);
+    
+    printf("Mostrando vector usando la libreria \n");
+    mostrarvector(misDatos, 3);
+    
+    return 0;
+}

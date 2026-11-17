@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int main(){
+    
+    int edad2;
+    int edad;
+    int *punteroedad = &edad;
+    
+    printf("Introduce la edad 1:");
+    scanf("%d", &edad);
+    
+    printf("Edad introducida: %d\n", edad);
+    printf("valor de edad antes del cambio %p\n", &edad);
+    printf("valor de puntero antes del cambio %p\n", punteroedad);
+    
+    printf("Introduce la edad para cambiarla:");
+    scanf("%d", &edad2);
+    
+    *punteroedad = edad2;
+    
+    printf("Edad tras el cambio: %d\n", edad2);
+    printf("valor de edad tras el cambio %p\n", edad2);
+    printf("valor del puntero tras el cambio %p\n", punteroedad);
+
+    
+
+    return 0;
+}

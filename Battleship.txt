@@ -1,0 +1,154 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int SIZE = 5; // tamaño del tablero 
+int total_barcos = 3; //cantidad de barcos de jugador
+
+//funcion para localizar el tablero en el agua
+void inicializarTablero(char tablero[SIZE][SIZE]){
+    for(int i = 0; i < SIZE; i++){
+        for(int j = 0; j < SIZE; j++){
+            tablero[i][j] = '~';
+        }
+    }
+}
+//funciona para mostrar tablero en pantalla
+void mostrarTablero(char tablero[SIZE][SIZE]){
+    printf("  ");
+    for(int j = 0; j < SIZE; j++){printf("%d", j);}
+    printf("\n");
+    for(int i = 0; i < SIZE; i++){
+        printf("%d", i);
+        for(int j = 0; j < SIZE; j++){
+            printf("%c", tablero[i][j]);
+        }
+        printf("\n");
+    }
+}
+int main(){
+//inicializar todos los tableros
+    char tableroP1[SIZE][SIZE];
+    char tableroP2[SIZE][SIZE];
+    
+    char tirosP1[SIZE][SIZE];
+    char tirosP2[SIZE][SIZE];
+    
+    inicializarTablero(tableroP1);
+    inicializarTablero(tableroP2);
+    inicializarTablero(tirosP2);
+    inicializarTablero(tirosP1);
+    int barcosRestantesP1 = total_barcos;
+    int barcosRestantesP2 = total_barcos;
+    //==========================================
+    // FASE 1: COLOCACION DE BARCOS JUGADOR 1
+    //==========================================
+    
+    printf("=== JUGADOR 1: Coloca tus %d barcos === \n", total_barcos);
+    for(int i = 0; i < total_barcos; i++){
+        int r, c;
+        
+        printf("Pocicion del barco %d (fila columna): ", i + 1);
+        scanf("%d %d", &r, &c);
+        if(r >= 0 && r < SIZE && c >= 0 && c < SIZE && tableroP1[r][c] == '~'){
+            tableroP1[r][c] = 'B';
+        } else {
+            printf("Cordenada invalida o ya ocupada, intenta de nuevo \n");
+            i--; //Decrementar i para repetir la colocacion del barco
+        }
+    }
+    printf("=== JUGADOR 2: Coloca tus %d barcos === \n", total_barcos);
+    for(int i = 0; i < total_barcos; i++){
+        int r, c;
+        
+        printf("Pocicion del barco %d (fila columna): ", i + 1);
+        scanf("%d %d", &r, &c);
+        if(r >= 0 && r < SIZE && c >= 0 && c < SIZE && tableroP2[r][c] == '~'){
+            tableroP2[r][c] = 'B';
+        } else {
+            printf("Cordenada invalida o ya ocupada, intenta de nuevo \n");
+            i--; //Decrementar i para repetir la colocacion del barco
+        }
+    }
+    
+    //Limpiar la pantalla para el siguiente jugador 
+    for(int i = 0; i < 30; i++);
+    printf("\n");
+    
+    int turno = 1;
+    
+    while(barcosRestantesP1 > 0 && barcosRestantesP2 > 0){
+        int r, c;
+        
+        if(turno == 1){
+            
+            //Turno del jugador 1
+            
+        printf("=== TURNO JUGADOR 1 ===\n");
+        mostrarTablero(tirosP1);
+        
+        //
+        printf("ingresa coordenadas para disparar (fila, columna): ");
+        scanf ("%d %d", &r, &c);
+        
+        if(r >= 0 && r < SIZE && c >= 0 && c < SIZE){
+            if(tableroP2[r][c] == 'B'){
+                printf("BUUUUM!!!, LE DISTE \n");
+                tirosP1[r][c] = 'X'; //Marcar disparo exitoso
+                tableroP2[r][c] = 'X'; //Marcar barco destruido
+                barcosRestantesP2--;
+            }else if(tirosP1[r][c] == '~'){
+                printf("Lastima, No le diste \n");
+                tirosP1[r][c] = '0'; //Marcar disparo fallido
+            }else {
+                printf("Ya disparaste aqui, intenta otra vez \n");
+            } turno = 2;
+            }else {
+                printf("Cordenada no valida Intenta otra vez \n");
+        }
+            
+        }else{
+            
+            //Turno del jugador 2
+            
+        printf("=== TURNO JUGADOR 2 ===\n");
+        mostrarTablero(tirosP2);
+        
+        //
+        printf("ingresa coordenadas para disparar (fila, columna): ");
+        scanf ("%d %d", &r, &c);
+        
+        if(r >= 0 && r < SIZE && c >= 0 && c < SIZE){
+            if(tableroP1[r][c] == 'B'){
+                printf("BUUUUM!!!, LE DISTE \n");
+                tirosP2[r][c] = 'X';
+                tableroP1[r][c] = 'X';
+                barcosRestantesP1--;
+            }else if(tirosP2[r][c] == '~'){
+                printf("Lastima, No le diste \n");
+                tirosP2[r][c] = '0';
+            }else {
+                printf("Ya disparaste aqui, intenta otra vez \n");
+            } turno = 1;
+            }else {
+                printf("Cordenada no valida Intenta otra vez \n");
+            }
+        }
+            
+        
+        ////limpiar pantalla////
+       for(int i = 0; i < 30; i ++) 
+       printf("\n");
+    }
+    
+    //Mostrar el resultado final
+    if(barcosRestantesP1 == 0){
+        printf("=== Jugador 2 GANA === \n");
+    }else{
+        printf("=== Jugador 1 GANA=== \n");
+    }
+       
+    //mostrarTablero(tableroP1);
+    //mostrarTablero(tableroP2);
+    
+    return 0;
+}

@@ -1,0 +1,364 @@
+#include <stdio.h>
+#define SIZE 5
+
+void mostrarTablero(char tablero[SIZE][SIZE])
+{
+    int i;
+    int j;
+
+    printf("\n  1 2 3 4 5\n");
+
+    for(i = 0; i < SIZE; i++)
+    {
+        printf("%d ", i);
+
+        for(j = 0; j < SIZE; j++)
+        {
+            printf("%c ", tablero[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+
+int calcularDistancia(int f1, int c1, int f2, int c2)
+{
+    int distanciaFila;
+    int distanciaColumna;
+
+    distanciaFila = f1 - f2;
+    distanciaColumna = c1 - c2;
+
+    if(distanciaFila < 0)
+    {
+        distanciaFila = distanciaFila * -1;
+    }
+
+    if(distanciaColumna < 0)
+    {
+        distanciaColumna = distanciaColumna * -1;
+    }
+
+    return distanciaFila + distanciaColumna;
+}
+
+int main()
+{
+    char tablero[SIZE][SIZE];
+
+    int vida[2];
+    int ataque[2];
+    int defensa[2];
+    int energia[2];
+
+    int fila[2];
+    int columna[2];
+
+    int defendiendo[2];
+    int danoTotal[2];
+    int turnos[2];
+
+    int i;
+    int j;
+    int turno;
+    int opcion;
+    int direccion;
+    int nuevaFila;
+    int nuevaColumna;
+    int distancia;
+    int dano;
+    int accionValida;
+
+    for(i = 0; i < SIZE; i++)
+    {
+        for(j = 0; j < SIZE; j++)
+        {
+            tablero[i][j] = '.';
+        }
+    }
+
+    tablero[2][2] = '#';
+    tablero[1][3] = '#';
+    tablero[3][1] = '#';
+
+    vida[0] = 100;
+    vida[1] = 100;
+
+    ataque[0] = 25;
+    ataque[1] = 20;
+
+    defensa[0] = 10;
+    defensa[1] = 8;
+
+    energia[0] = 40;
+    energia[1] = 40;
+
+    fila[0] = 0;
+    columna[0] = 0;
+
+    fila[1] = 4;
+    columna[1] = 4;
+
+    defendiendo[0] = 0;
+    defendiendo[1] = 0;
+
+    danoTotal[0] = 0;
+    danoTotal[1] = 0;
+
+    turnos[0] = 0;
+    turnos[1] = 0;
+
+    tablero[fila[0]][columna[0]] = 'J';
+    tablero[fila[1]][columna[1]] = 'E';
+
+    turno = 0;
+
+    while(vida[0] > 0 && vida[1] > 0)
+    {
+        accionValida = 0;
+
+        printf("\n===== BATALLA TACTICA =====\n");
+
+        mostrarTablero(tablero);
+
+        printf("\nJugador %d\n", turno + 1);
+        printf("Vida: %d\n", vida[turno]);
+        printf("Energia: %d\n", energia[turno]);
+
+        printf("\n1. Moverse\n");
+        printf("2. Atacar\n");
+        printf("3. Defenderse\n");
+        printf("4. Habilidad especial\n");
+        printf("5. Consultar estado\n");
+
+        printf("Elige una opcion: ");
+        scanf("%d", &opcion);
+
+        switch(opcion)
+        {
+            case 1:
+
+                printf("\n1. Arriba\n");
+                printf("2. Abajo\n");
+                printf("3. Izquierda\n");
+                printf("4. Derecha\n");
+                printf("Elige una direccion: ");
+
+                scanf("%d", &direccion);
+
+                nuevaFila = fila[turno];
+                nuevaColumna = columna[turno];
+
+                if(direccion == 1)
+                {
+                    nuevaFila--;
+                }
+                else if(direccion == 2)
+                {
+                    nuevaFila++;
+                }
+                else if(direccion == 3)
+                {
+                    nuevaColumna--;
+                }
+                else if(direccion == 4)
+                {
+                    nuevaColumna++;
+                }
+                else
+                {
+                    printf("Direccion no valida.\n");
+                }
+
+                if(direccion >= 1 && direccion <= 4)
+                {
+                    if(nuevaFila >= 0 && nuevaFila < SIZE &&
+                       nuevaColumna >= 0 && nuevaColumna < SIZE)
+                    {
+                        if(tablero[nuevaFila][nuevaColumna] == '.')
+                        {
+                            tablero[fila[turno]][columna[turno]] = '.';
+
+                            fila[turno] = nuevaFila;
+                            columna[turno] = nuevaColumna;
+
+                            if(turno == 0)
+                            {
+                                tablero[nuevaFila][nuevaColumna] = 'J';
+                            }
+                            else
+                            {
+                                tablero[nuevaFila][nuevaColumna] = 'E';
+                            }
+
+                            printf("Movimiento realizado.\n");
+                            accionValida = 1;
+                        }
+                        else
+                        {
+                            printf("No puedes ocupar esa casilla.\n");
+                        }
+                    }
+                    else
+                    {
+                        printf("No puedes salir del tablero.\n");
+                    }
+                }
+
+                break;
+
+            case 2:
+
+                distancia = calcularDistancia(
+                    fila[turno],
+                    columna[turno],
+                    fila[1 - turno],
+                    columna[1 - turno]
+                );
+
+                if(distancia == 1)
+                {
+                    dano = ataque[turno] - defensa[1 - turno];
+
+                    if(dano < 1)
+                    {
+                        dano = 1;
+                    }
+
+                    if(defendiendo[1 - turno] == 1)
+                    {
+                        dano = dano / 2;
+
+                        if(dano < 1)
+                        {
+                            dano = 1;
+                        }
+
+                        defendiendo[1 - turno] = 0;
+                    }
+
+                    vida[1 - turno] = vida[1 - turno] - dano;
+
+                    danoTotal[turno] = danoTotal[turno] + dano;
+
+                    printf("Ataque realizado.\n");
+                    printf("Dano causado: %d\n", dano);
+
+                    accionValida = 1;
+                }
+                else
+                {
+                    printf("El enemigo esta fuera de alcance.\n");
+                }
+
+                break;
+
+            case 3:
+
+                defendiendo[turno] = 1;
+
+                printf("Te has puesto en posicion de defensa.\n");
+
+                accionValida = 1;
+
+                break;
+
+            case 4:
+
+                distancia = calcularDistancia(
+                    fila[turno],
+                    columna[turno],
+                    fila[1 - turno],
+                    columna[1 - turno]
+                );
+
+                if(energia[turno] >= 30)
+                {
+                    if(distancia <= 2 && distancia > 0)
+                    {
+                        dano = ataque[turno] * 2 - defensa[1 - turno];
+
+                        if(dano < 1)
+                        {
+                            dano = 1;
+                        }
+
+                        if(defendiendo[1 - turno] == 1)
+                        {
+                            dano = dano / 2;
+
+                            if(dano < 1)
+                            {
+                                dano = 1;
+                            }
+
+                            defendiendo[1 - turno] = 0;
+                        }
+                        
+                        vida[1 - turno] = vida[1 - turno] - dano;
+                        
+                        energia[turno] = energia[turno] - 30;
+                        
+                        danoTotal[turno] = danoTotal[turno] + dano;
+                        
+                        printf("Habilidad especial utilizada.\n");
+                        printf("Dano causado: %d\n", dano);
+                        accionValida = 1;
+                    }
+                    else
+                    {
+                        printf("El enemigo esta fuera de alcance.\n");
+                    }
+                }
+                else
+                {
+                    printf("No tienes suficiente energia.\n");
+                }
+                break;
+            case 5:
+                printf("\n===== ESTADO DE LOS PERSONAJES =====\n");
+                printf("Jugador 1 - Vida: %d Energia: %d\n", vida[0], energia[0]);
+                printf("Jugador 2 - Vida: %d Energia: %d\n", vida[1], energia[1]);
+                break;
+            default:
+                printf("Opcion no valida.\n");
+                break;
+        }
+
+        if(accionValida == 1)
+        {
+            turnos[turno]++;
+            energia[turno] = energia[turno] + 10;
+            if(energia[turno] > 100)
+            {
+                energia[turno] = 100;
+            }
+            turno = 1 - turno;
+        }
+    }
+
+    printf("\n===== FIN DE LA BATALLA =====\n");
+
+    if(vida[0] <= 0)
+    {
+        printf("El jugador 2 ha ganado.\n");
+    }
+    else
+    {
+        printf("El jugador 1 ha ganado.\n");
+    }
+
+    printf("\n===== ESTADISTICAS =====\n");
+
+    printf("Jugador 1:\n");
+    printf("Vida restante: %d\n", vida[0]);
+    printf("Dano realizado: %d\n", danoTotal[0]);
+    printf("Turnos utilizados: %d\n", turnos[0]);
+
+    printf("\nJugador 2:\n");
+    printf("Vida restante: %d\n", vida[1]);
+    printf("Dano realizado: %d\n", danoTotal[1]);
+    printf("Turnos utilizados: %d\n", turnos[1]);
+
+    return 0;
+}

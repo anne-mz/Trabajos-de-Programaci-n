@@ -1,0 +1,74 @@
+#include <stdio.h>
+
+int main(){
+    
+    int menu;
+    int edad3 = 0;
+    int edad2 = 0;
+    int edad1 = 0;
+    int edad;
+    int *punteroedad = &edad;
+    
+    do{
+        
+        printf("==================== \n");
+        printf("¿Que quieres hacer? \n");
+        printf("==================== \n");
+        printf("1.- Introducir edad de alumno 1: \n");
+        printf("2.- Introducir edad de alumno 2: \n");
+        printf("3.- Introducir edad de alumno 3: \n");
+        printf("4.- Verificar edades \n");
+        printf("5.- Salir del menu \n");
+        scanf("%d", &menu);
+        
+        switch(menu){
+            case 1:
+            
+             printf("Introduce la edad:");
+             scanf("%d", &edad1);
+             
+             *punteroedad = edad1;
+             
+             printf("Edad introducida: %d\n", edad1);
+             printf("valor de edad actual %p\n", &edad);
+             printf("valor de puntero actual %p\n", punteroedad);
+             break;
+            case 2:
+             
+             printf("Introduce la edad:");
+             scanf("%d", &edad2);
+             
+             *punteroedad = edad2;
+             
+             printf("Edad introducida: %d\n", edad2);
+             printf("valor de edad actual %p\n", &edad2);
+             printf("valor de puntero actual %p\n", punteroedad);
+             break;
+             case 3:
+             
+             printf("Introduce la edad:");
+             scanf("%d", &edad3);
+             
+             *punteroedad = edad3;
+             
+             printf("Edad introducida: %d\n", edad3);
+             printf("valor de edad actual %p\n", &edad3);
+             printf("valor de puntero actual %p\n", punteroedad);
+             
+             break;
+            case 4:
+             
+             printf("Edad de alumno 1: %.0d\nEdad del alumno 2: %.0d\nEdad del alumno 3: %.0d\n", edad1, edad2, edad3);
+             
+             break;
+             case 5:
+             printf("Saliste del menu \n");
+             break;
+            default:
+             printf("opción no valida \n");
+        }
+        
+     }while (menu != 5);
+
+    return 0;
+}
